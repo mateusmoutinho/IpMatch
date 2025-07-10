@@ -1,7 +1,7 @@
 
 
 function Initialize_silver()
-  darwin.dtw.remove_any("src/imports")
+  --darwin.dtw.remove_any("src/imports")
 
   darwin.silverchain.generate({
       src = "src",
@@ -9,7 +9,7 @@ function Initialize_silver()
       project_short_cut = Name_lib
   })
 
-  print("\tFinalized SilverChain.\n")
+  print("\tFinalized SilverChain.")
 
 end
 

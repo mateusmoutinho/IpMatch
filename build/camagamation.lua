@@ -5,22 +5,14 @@ function Camalga()
 
   local max_content = darwin.camalgamator.ONE_MB * 10
   local max_recursion = 100
-  result = darwin.camalgamator.generate_amalgamation_with_callback("src/main.c",
-    function(import, path)
-      --print("import:", import)
-      --print("path:", path)
-      --print("-------------")
+  local path_imports = "src/imports/imports."
+  local result_header = darwin.camalgamator.generate_amalgamation(path_imports .. "dec.h", max_content, max_recursion)
+  local result_cod = darwin.camalgamator.generate_amalgamation(path_imports .. "def.h", max_content, max_recursion)
 
-      if path == "../dependencies/dep.LuaCEmbed.h" then
-        return "dont-include"
-      end
+  darwin.dtw.write_file("releases/ipMatch.h", result_header or "")
+  darwin.dtw.write_file("releases/ipMatch.c", result_cod or "")
 
-      return "include-once"
-    end,
-    max_content,
-    max_recursion
-)
-  io.open("realeses/CandangoEngine.c", "w"):write(result)
+  print("\tFinalized Amalgamation.")
 
 end
 
