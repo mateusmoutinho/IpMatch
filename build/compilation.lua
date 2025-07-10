@@ -21,18 +21,20 @@ local function Preparation(cc, main, flags, path, name_out)
 
   local command = cc .. ' ' .. flags .. " -o " .. path_exe .. " src/" .. main
   print("\n\tCommand: " .. command .. "\n")
-  local result = os.execute(cc .. ' ' .. flags .. " -o " .. path_exe .. " src/" .. main)
+  local result = os.execute(command)
 
   if not result then
     os.exit(1)
   end
 
-  Text.green("\n\tCompiled the" .. name_out .. " in " .. path .. "\n")
+  Text.green("\n\tCompiled the " .. name_out .. " in " .. path_exe .. "\n")
 end
 
 function Comp_testing()
-  Preparation("gcc", "testing.c ", "", "test/c", "test.out")
-  os.execute("test/c/test.out > test/c/teste.txt")
+  local out_name = "test"
+  local path_of_tests = "test/" .. os.date("H%H_M%M_S%S")
+  Preparation("gcc", "main.c ", "", path_of_tests, out_name)
+  os.execute(path_of_tests .. "/" .. out_name .. " | tee " .. path_of_tests .. "/" .. out_name .. ".txt")
 end
 
 function Comp()

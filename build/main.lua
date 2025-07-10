@@ -31,11 +31,11 @@ function main()
 --      func=Update_doc,
 --      description="Builds 'README.md' from 'doc/main.md'."
 --    },
---    {
---      arg="comp_testing",
---      func=Comp_testing,
---      description="Compiles test mode from 'src/testing.c' to 'test/c/teste.out' and with an output to 'test/c/teste.txt'."
---    },
+    {
+      arg="comp_testing",
+      func=Comp_testing,
+      description="Compiles test mode from 'src/testing.c' to 'test/c/teste.out' and with an output to 'test/c/teste.txt'."
+    },
 --    {
 --      arg="comp",
 --      func=Comp,
