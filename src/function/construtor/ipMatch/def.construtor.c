@@ -11,7 +11,7 @@ IpMatch *IpMatch_new_ip(const char *raw_ip, _private_type_malloc_IpMatch private
     return 0;
   }
 
-  self->ip_string = raw_ip;
+  self->ip_string = Private_IpMatch_strdup(raw_ip, private_allocate);
 
   if(IpMatch_is_ipv6(self->ip_string)){
     return 0;
@@ -26,6 +26,9 @@ IpMatch *IpMatch_new_ip(const char *raw_ip, _private_type_malloc_IpMatch private
 
 void IpMatch_free(IpMatch *self, _private_type_free_IpMatch private_free){
   if(self){
+    if(self->ip_string){
+      private_free(self->ip_string);
+    }
     private_free(self);
   }
 }
