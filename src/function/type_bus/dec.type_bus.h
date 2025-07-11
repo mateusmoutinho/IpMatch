@@ -7,4 +7,5 @@
 
 short IpMatch_is_ipv6(const char *ip_raw);
 
+short IpMatch_is_ipv4_valid(const char *ip_raw, int *octets_out, short *mask_out);
 

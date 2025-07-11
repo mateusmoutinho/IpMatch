@@ -17,7 +17,12 @@ void print_bin(unsigned int value) {
 int main(){
   printf("\n\tComeçou\n");
 
-  const char *ip = "1.1.1.1/24";
+  const char *ip = "8.4.2.1/23";
+
+  if(!IpMatch_is_ipv4_valid(ip, NULL, NULL)){
+    printf("\n\tNão é um ip valido!\n");
+    return 1;
+  }
 
   IpMatch *ip_criado = IpMatch_new_ip(ip, malloc);
 
@@ -34,6 +39,8 @@ int main(){
   printf("\n\tmask_byn:<");
   print_bin(ip_criado->mask_binary);
   printf(">\n");
+
+  IpMatch_free(ip_criado, free);
 
   return 0;
 }

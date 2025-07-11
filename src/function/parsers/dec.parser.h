@@ -4,6 +4,6 @@
 //silver_chain_scope_end
 
 
-short ipMatch_parser_ipv4(IpMatch *self);
+short Private_IpMatch_parser_ipv4(IpMatch *self);
 
 

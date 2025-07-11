@@ -17,11 +17,17 @@ IpMatch *IpMatch_new_ip(const char *raw_ip, _private_type_malloc_IpMatch private
     return 0;
   }
 
-  if(!ipMatch_parser_ipv4(self)){
+  if(!Private_IpMatch_parser_ipv4(self)){
     return 0;
   }
 
   return self;
+}
+
+void IpMatch_free(IpMatch *self, _private_type_free_IpMatch private_free){
+  if(self){
+    private_free(self);
+  }
 }
 
 

@@ -7,5 +7,6 @@
 
 IpMatch *IpMatch_new_ip(const char *raw_ip, _private_type_malloc_IpMatch private_allocate);
 
+void IpMatch_free(IpMatch *self, _private_type_free_IpMatch private_free);
 
 
