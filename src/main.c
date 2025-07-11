@@ -14,23 +14,23 @@ void print_bin(unsigned int value) {
   }
 }
 
-int main(){
-  printf("\n\tComeçou\n");
-
-  const char *ip = "8.4.2.1/23";
+IpMatch *criar_um_ip(const char *ip){
 
   if(!IpMatch_is_ipv4_valid(ip, NULL, NULL)){
-    printf("\n\tNão é um ip valido!\n");
-    return 1;
+    printf("Esse ip não é valido!!!");
+    exit(1);
   }
 
   IpMatch *ip_criado = IpMatch_new_ip(ip, malloc);
-
   if(!ip_criado){
-    printf("\n\tNão deu certo!!\n");
-    return 1;
+    printf("\n\tNão deu certo!!!\n");
+    exit(1);
   }
 
+  return ip_criado;
+}
+
+void detalhes(IpMatch *ip_criado){
   printf("\n\tIP:<%s>\n", ip_criado->ip_string);
   printf("\n\tIP_byn:<");
   print_bin(ip_criado->ip_binary);
@@ -39,8 +39,21 @@ int main(){
   printf("\n\tmask_byn:<");
   print_bin(ip_criado->mask_binary);
   printf(">\n");
+}
 
-  IpMatch_free(ip_criado, free);
+int main(){
+  printf("\n\tComeçou\n");
+
+  const char *ref_str = "8.0.0.0/8";
+  const char *ip_str = "8.4.2.1/23";
+
+  IpMatch *ref = criar_um_ip(ref_str);
+  IpMatch *ip = criar_um_ip(ip_str);
+
+  printf("\n\tSão iguais? <%s>\n", IpMatch_is_ip_inside(ref, ip)?"TRUE":"FALSE");
+
+  IpMatch_free(ref, free);
+  IpMatch_free(ip, free);
 
   return 0;
 }
