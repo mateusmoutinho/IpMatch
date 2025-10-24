@@ -18,9 +18,10 @@ function Camalga()
     max_content,
     max_recursion
   )
+  result_cod = "#include \"ipMatch.h\"\n\n" .. (result_cod or "")
 
   darwin.dtw.write_file("releases/ipMatch.h", result_header or "")
-  darwin.dtw.write_file("releases/ipMatch.c", result_cod or "")
+  darwin.dtw.write_file("releases/ipMatch.c", result_cod )
 
   print("\tFinalized Amalgamation.")
 
